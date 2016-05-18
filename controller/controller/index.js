@@ -8,7 +8,13 @@ function makeController(heading, speed, backled) {
   backled = typeof backled === 'boolean' ? backled : true
 
   return through((cmd, enc, cb) => {
-    
+    cmd.state = {
+        heading: heading
+      , speed: speed
+      , backled: backled
+    }
+
+    cb(null, cmd)
   })
 }
 
