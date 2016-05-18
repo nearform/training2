@@ -11,7 +11,7 @@ function makeController(heading, speed, backled) {
     cmd.state = {
         heading: heading
       , speed: speed
-      , backled: backled
+      , backled: (backled === true ? false : true )
     }
 
     cb(null, cmd)
