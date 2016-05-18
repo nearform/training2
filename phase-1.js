@@ -11,4 +11,3 @@ keypresser()
   .pipe(killer())
   .pipe(nd.serialize())
   .pipe(process.stdout)
-

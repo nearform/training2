@@ -8,34 +8,35 @@ function makeController(heading, speed, backled) {
   backled = typeof backled === 'boolean' ? backled : true
 
   return through((cmd, enc, cb) => {
+
+    if (cmd.name == 'toggle-backled') {
+      backled = !backled
+    }
+
+    if (cmd.name == 'right') {
+      heading = (heading + 15) % 360
+    }
+
+    if (cmd.name == 'left') {
+      heading = (360 + heading - 15) % 360
+    }
+
+    if (cmd.name == '180') {
+      heading = (360 + heading + 180) % 360
+    }
+
+    if (cmd.name == 'slower') {
+      speed = speed < 0.1 ? 0.1 : speed - 0.1
+    }
+
+    if (cmd.name == 'faster') {
+      speed = speed > 1 ? 1 : speed + 0.1
+    }
+
     cmd.state = {
         heading: heading
       , speed: speed
       , backled: backled
-    }
-
-    if (cmd.name == 'toggle-backled') {
-      cmd.state.backled = !backled
-    }
-
-    if (cmd.name == 'right') {
-      cmd.state.heading = (cmd.state.heading + 15) % 360
-    }
-
-    if (cmd.name == 'left') {
-      cmd.state.heading = (360 + cmd.state.heading - 15) % 360
-    }
-
-    if (cmd.name == '180') {
-      cmd.state.heading = (360 + cmd.state.heading + 180) % 360
-    }
-
-    if (cmd.name == 'slower') {
-      cmd.state.speed = cmd.state.speed < 0.1 ? 0.1 : cmd.state.speed - 0.1
-    }
-
-    if (cmd.name == 'faster') {
-      cmd.state.speed = cmd.state.speed > 1 ? 1 : cmd.state.speed + 0.1
     }
 
     cb(null, cmd)
