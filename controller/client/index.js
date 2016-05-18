@@ -10,9 +10,9 @@ module.exports = function (port) {
 
   // this is the client
   stream.client = reconnect(function (socket) {
-    socket.pipe(stream);
+    socket.pipe(stream).pipe(socket);
     if (socketReference) {
-        socketReference.unpipe(stream);
+        socketReference.unpipe(stream).unpipe(socketReference);
     }
     socketReference = socket;
 
