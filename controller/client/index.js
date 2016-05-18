@@ -24,7 +24,7 @@ module.exports = function (port) {
   }).connect(port || 8124)
 
   eos(stream, function () {
-      stream.client.destroy();
+      stream.client.disconnect();
   })
 
   stream.client.on('error', function () {
