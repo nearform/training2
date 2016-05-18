@@ -31,38 +31,16 @@ test('creates TCP socket that connects to default port 8124', (assert) => {
   }).listen(8124)
 })
 
-test('disconnects TCP connection on stream end', (assert) => {
-  const connection = client(8125)
-  const dc = connection.client.disconnect
-  connection.client.disconnect = () => {
-    clearTimeout(to)
-    assert.pass('evidence of disconnect')
-    dc.call(connection.client)
-    server.close()
-    assert.end()
-  }
-  connection.end()
-
-  const to = setTimeout(() => {
-    assert.fail('timed out')
-    dc.call(connection.client)
-    server.close()
-    assert.end()
-  }, 1500)
-
-  const server = net.createServer((socket) => socket.end()).listen(8125)
-})
-
 test('retries on connection failure', (assert) => {
   const connection = client(8126)
   let count = 0
   const server = net.createServer((socket) => {
     if (!count) {
       count += 1
-      socket.end()  
+      socket.end()
       return
     }
-    
+
     assert.equal(count, 1, 'evidence of retry')
     assert.end()
 
@@ -85,7 +63,7 @@ test('displays helpful message when ECONNREFUSED', (assert) => {
   connection.client.disconnect()
   setTimeout(() => {
     console.error = errlog
-    assert.end()  
+    assert.end()
   }, 10)
  }
 
