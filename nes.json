@@ -1,0 +1,18 @@
+{
+  "description": "2Axes 11Keys Game  Pad",
+
+  "vendorID": 4797,
+  "productID": 53269,
+
+  "axis": [
+    { "name": "y", "id": 1 },
+    { "name": "x", "id": 0 }
+  ],
+
+  "buttons": [
+    { "name": "b", "id": 1 },
+    { "name": "a", "id": 0 },
+    { "name": "start", "id": 9 },
+    { "name": "select", "id": 8 }
+  ]
+}
