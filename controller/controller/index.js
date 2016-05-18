@@ -26,11 +26,13 @@ function makeController(heading, speed, backled) {
     }
 
     if (cmd.name == 'slower') {
-      speed = speed < 0.1 ? 0.1 : speed - 0.1
+      speed = speed - 0.1
+      speed = speed < 0.1 ? 0.1 : speed
     }
 
     if (cmd.name == 'faster') {
-      speed = speed > 1 ? 1 : speed + 0.1
+      speed = speed + 0.1
+      speed = speed > 1 ? 1 : speed
     }
 
     cmd.state = {
