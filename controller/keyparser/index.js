@@ -13,7 +13,7 @@ const keyMap = {
   right: 'right'
 }
 
-module.exports = () => through(function (keyObj, enc, cb) {
+module.exports = () => through((keyObj, enc, cb) => {
   const input = keyObj.key ? combineModifier(keyObj.key) : keyObj.ch
   const name = keyMap[input]
 
@@ -21,10 +21,7 @@ module.exports = () => through(function (keyObj, enc, cb) {
     return cb()
   }
 
-  // tips:
-  // output objects with form {name}
-  this.push({name})
-  cb()
+  cb(null, {name})
 })
 
 function combineModifier (key) {
